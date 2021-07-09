@@ -32,6 +32,11 @@ let CreateCharacter= async (req,res)=>{
         if(!user){
             return res.json({msg: "Sign Up for creating a character"})
         }
+
+        let characterValid =await getCharacterByName(name)
+        if(characterValid){
+            return res.json({msg: "Character`s name is already in use"})
+        }
         const newCharacter = new Character({
             name:name,
             user:userId,
@@ -64,7 +69,7 @@ let LevelUpCharacter = async (req,res)=>{
        if(nextLevel>=100){
           return res.json({msg: "Your character has reached the maximum level"})
        }
-        await patchCharacter({name,nextLevel})
+        await patchCharacter(name,nextLevel)
         character.level = nextLevel
         res.json(character)
         

@@ -14,8 +14,9 @@ let addCharacter = async (character)=> {
     return await character.save()
 }
 
-let patchCharacter = async ({characterName,nextLevel})=> {
-    return await Character.updateOne({name:characterName},{ level: nextLevel })
+let patchCharacter = async (characterName,nextLevel)=> {
+    return await Character.updateOne({name:characterName},{level: nextLevel})
+ 
 }
 
 let getCharacterByName = async (characterName)=> {
